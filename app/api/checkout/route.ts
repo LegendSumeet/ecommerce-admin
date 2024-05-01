@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import { randomInt } from "crypto";
+import Order from "@/lib/models/Order";
+import ShippingAddress from "@/lib/models/address";
 
 
 
@@ -37,6 +39,18 @@ export async function POST(req: NextRequest) {
 
     try {
       const response = await razorpay.orders.create(options);
+      const shippingAddress = await ShippingAddress.findOne({ customerId: customer.id });
+      const newOrder = new Order({
+        customerClerkId: customer.id,
+        products: cartItems.map((cartItem: { item: { id: any; price: any; }; quantity: any; }) => ({
+          productId: cartItem.item.id,
+          price: cartItem.item.price,
+          quantity: cartItem.quantity,
+        })),
+        shippingAddress,
+        shippingRate:0,
+        totalAmount: totalPrice,
+      })
       return new NextResponse(JSON.stringify({
         id: response.id,
         currency: response.currency,
@@ -48,6 +62,9 @@ export async function POST(req: NextRequest) {
           "Access-Control-Allow-Headers": "Content-Type",
         }
       });
+
+       
+
     } catch (err) {
       console.error("Error creating Razorpay order:", err);
       return new NextResponse("Error creating Razorpay order", { status: 500 });
