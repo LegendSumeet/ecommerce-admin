@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
 import Razorpay from "razorpay";
 import { randomInt } from "crypto";
-import { headers } from "next/headers";
-
 
 export async function OPTIONS() {
   // Define CORS headers directly in the response
@@ -13,8 +10,9 @@ export async function OPTIONS() {
       "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
     }
-  })
+  });
 }
+
 export async function POST(req: NextRequest) {
   try {
     const { cartItems, customer } = await req.json();
