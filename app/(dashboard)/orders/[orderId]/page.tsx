@@ -23,7 +23,7 @@ const OrderDetails = async ({ params }: { params: { orderId: string }}) => {
         Shipping address: <span className="text-base-medium">{street}, {city}, {state}, {postalCode}, {country}</span>
       </p>
       <p className="text-base-bold">
-        Total Paid: <span className="text-base-medium">${orderDetails.totalAmount}</span>
+        Total Paid: <span className="text-base-medium">{orderDetails.totalAmount}</span>
       </p>
       <p className="text-base-bold">
         Shipping rate ID: <span className="text-base-medium">{orderDetails.shippingRate}</span>
