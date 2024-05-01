@@ -5,16 +5,16 @@ import { randomInt } from "crypto";
 import { headers } from "next/headers";
 
 
-const Headers = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-};
-
 export async function OPTIONS() {
-  return NextResponse.json({}, { headers: Headers });
+  // Define CORS headers directly in the response
+  return NextResponse.json({}, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    }
+  })
 }
-
 export async function POST(req: NextRequest) {
   try {
     const { cartItems, customer } = await req.json();
