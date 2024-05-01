@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     const payment_capture = 1;
     const currency = "INR";
     const options = {
-      amount: totalPrice,
+      amount: totalPrice * 100,
       currency,
       receipt: randomInt(100000, 999999).toString(),
       payment_capture,
