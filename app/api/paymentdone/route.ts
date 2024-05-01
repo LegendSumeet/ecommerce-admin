@@ -29,7 +29,13 @@ export async function POST(req: NextRequest) {
 
       const newOrder = new Order({
         customerClerkId: customer.clerkId,
-        products: cartItems,
+        products: cartItems.map(
+            (cartItem: { item: { id: any; price: any }; quantity: any }) => ({
+                productId: cartItem.item.id,
+                price: cartItem.item.price,
+                quantity: cartItem.quantity,
+            })
+        ),
         address,
         shippingRate: "0",
         totalAmount: totalPrice,
