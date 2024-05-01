@@ -20,7 +20,7 @@ export const GET = async (
   
       return new NextResponse(JSON.stringify(addresses),{
         headers: {
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": "http://localhost:3001",
           "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
           "Access-Control-Allow-Headers": "Content-Type",
         },
