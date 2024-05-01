@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
                 price: cartItem.item.price,
                 quantity: cartItem.quantity,
             })
-        ),
+            ),
         address,
         shippingRate: "0",
         totalAmount: totalPrice,
