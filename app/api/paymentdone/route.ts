@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     try {
       await connectToDB();
 
-      const address = await ShippingAddress.findOne({ userid: customer.id });
+      const address = await ShippingAddress.findOne({ userid: customer.clerkId });
 
       let totalPrice = 0;
 
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       );
 
       const newOrder = new Order({
-        customerClerkId: customer.id,
+        customerClerkId: customer.clerkId,
         products: cartItems,
         address,
         shippingRate: "0",
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
       await newOrder.save();
 
-      let newCustomer = await Customer.findOne({ clerkId: customer.id });
+      let newCustomer = await Customer.findOne({ clerkId: customer.clerkId });
       if (newCustomer) {
         newCustomer.orders.push(newOrder._id);
       } else {
