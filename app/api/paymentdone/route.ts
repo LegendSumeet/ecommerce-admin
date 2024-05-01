@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
         customerClerkId: customer.clerkId,
         products: cartItems.map(
             (cartItem: { item: { id: any; price: any }; quantity: any }) => ({
-                productId: cartItem.item.id,
+                product: cartItem.item.id,
                 price: cartItem.item.price,
                 quantity: cartItem.quantity,
             })
