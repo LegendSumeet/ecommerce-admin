@@ -36,10 +36,7 @@ export async function POST(req: NextRequest) {
     };
 
     try {
-      // Create Razorpay order
       const response = await razorpay.orders.create(options);
-
-      // Respond with order details
       return new NextResponse(JSON.stringify({
         id: response.id,
         currency: response.currency,

@@ -46,32 +46,7 @@ export const POST = async (req: NextRequest) => {
           size: item.price.product.metadata.size || "N/A",
           quantity: item.quantity,
         }
-      })
-
-      await connectToDB()
-
-      const newOrder = new Order({
-        customerClerkId: customerInfo.clerkId,
-        products: orderItems,
-        shippingAddress,
-        shippingRate: session?.shipping_cost?.shipping_rate,
-        totalAmount: session.amount_total ? session.amount_total / 100 : 0,
-      })
-
-      await newOrder.save()
-
-      let customer = await Customer.findOne({ clerkId: customerInfo.clerkId })
-
-      if (customer) {
-        customer.orders.push(newOrder._id)
-      } else {
-        customer = new Customer({
-          ...customerInfo,
-          orders: [newOrder._id],
-        })
-      }
-
-      await customer.save()
+      });
     }
 
     return new NextResponse("Order created", { status: 200 })
