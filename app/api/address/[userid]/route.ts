@@ -17,7 +17,8 @@ export const GET = async (
             "Access-Control-Allow-Origin": "http://localhost:3001",
             "Access-Control-Allow-Methods": "GET, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type",
-          }
+          },
+          status: 404
         }
       );
     }
