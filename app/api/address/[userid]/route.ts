@@ -12,13 +12,23 @@ export const GET = async (
     const addresses = await ShippingAddress.find({ userid: params.userid });
     if (!addresses || addresses.length === 0) {
       return new NextResponse(
-        JSON.stringify({ message: "Addresses not found for the user" }),
-        { status: 404 }
+        JSON.stringify({ message: "Addresses not found for the user" }),{
+          headers: {
+            "Access-Control-Allow-Origin": "http://localhost:3001",
+            "Access-Control-Allow-Methods": "GET, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+          }
+        }
       );
     }
 
     return new NextResponse(JSON.stringify(addresses), {
-        status: 200,
+        headers:{
+          "Access-Control-Allow-Origin": "http://localhost:3001",
+          "Access-Control-Allow-Methods": "GET, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        }
+        
     });
   } catch (err) {
     console.error("[collectionId_GET]", err);
