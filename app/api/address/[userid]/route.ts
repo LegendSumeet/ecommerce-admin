@@ -13,11 +13,18 @@ export const GET = async (
       if (!addresses) {
         return new NextResponse(
           JSON.stringify({ message: "address not found" }),
-          { status: 404 }
+          { status: 404 },
+        
         );
       }
   
-      return NextResponse.json(addresses, { status: 200 });
+      return new NextResponse(JSON.stringify(addresses),{
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      });
     } catch (err) {
       console.log("[collectionId_GET]", err);
       return new NextResponse("Internal error", { status: 500 });
