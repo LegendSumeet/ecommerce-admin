@@ -2,16 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import { randomInt } from "crypto";
 
-export async function OPTIONS() {
-  // Define CORS headers directly in the response
-  return NextResponse.json({}, {
-    headers: {
-      "Access-Control-Allow-Origin": "http://localhost:3000",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-    }
-  });
-}
+
 
 export async function POST(req: NextRequest) {
   try {
@@ -53,7 +44,13 @@ export async function POST(req: NextRequest) {
         id: response.id,
         currency: response.currency,
         amount: response.amount,
-      }));
+      }), {
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        }
+      });
     } catch (err) {
       console.error("Error creating Razorpay order:", err);
       return new NextResponse("Error creating Razorpay order", { status: 500 });
