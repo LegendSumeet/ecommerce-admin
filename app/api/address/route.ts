@@ -25,7 +25,7 @@ export const POST = async (req: NextRequest) => {
           JSON.stringify(newAddress),
           {
             headers: {
-              'Access-Control-Allow-Origin': 'http://localhost:3001',
+              'Access-Control-Allow-Origin': 'https://eshoppe-store.vercel.app',
               'Access-Control-Allow-Methods': 'POST, OPTIONS',
               'Access-Control-Allow-Headers': 'Content-Type',
             },
@@ -38,7 +38,7 @@ export const POST = async (req: NextRequest) => {
       console.log("[collections_POST]", err)
       return new NextResponse("Internal Server Error", { status: 500 ,
         headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:3001',
+          'Access-Control-Allow-Origin': 'https://eshoppe-store.vercel.app',
           'Access-Control-Allow-Methods': 'POST, OPTIONS',
           'Access-Control-Allow-Headers': 'Content-Type',
         },})
