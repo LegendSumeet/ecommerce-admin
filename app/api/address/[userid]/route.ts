@@ -18,11 +18,7 @@ export const GET = async (
     }
 
     return new NextResponse(JSON.stringify(addresses), {
-      headers: {
-        "Access-Control-Allow-Origin": "http://localhost:3001",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
+        status: 200,
     });
   } catch (err) {
     console.error("[collectionId_GET]", err);
