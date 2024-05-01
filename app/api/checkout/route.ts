@@ -2,12 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import Razorpay from "razorpay";
 import { randomInt } from "crypto";
+import { headers } from "next/headers";
 
 
-
+const Headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
 
 export async function OPTIONS() {
-  return NextResponse.json({});
+  return NextResponse.json({}, { headers: Headers });
 }
 
 export async function POST(req: NextRequest) {
@@ -25,7 +30,6 @@ export async function POST(req: NextRequest) {
     const razorpayKey = process.env.RAZORPAY_KEY;
     let totalPrice = 0;
 
-    // Loop through each item in the cart and calculate total price
     cartItems.forEach((cartItem: { item: { price: number; }; quantity: number; }) => {
         totalPrice += cartItem.item.price * cartItem.quantity;
     });
