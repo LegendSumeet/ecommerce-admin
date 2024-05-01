@@ -6,7 +6,7 @@ export async function OPTIONS() {
   // Define CORS headers directly in the response
   return NextResponse.json({}, {
     headers: {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": "http://localhost:3001",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
     }
