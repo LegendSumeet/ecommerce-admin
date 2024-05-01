@@ -21,11 +21,27 @@ export const POST = async (req: NextRequest) => {
         })
         await newAddress.save()
   
-        return NextResponse.json(newAddress, { status: 200 })
+        return new NextResponse(
+          JSON.stringify(newAddress),
+          {
+            headers: {
+              'Access-Control-Allow-Origin': 'http://localhost:3001',
+              'Access-Control-Allow-Methods': 'POST, OPTIONS',
+              'Access-Control-Allow-Headers': 'Content-Type',
+            },
+            status: 201,
+          },
+      
+        )
       
     } catch (err) {
       console.log("[collections_POST]", err)
-      return new NextResponse("Internal Server Error", { status: 500 })
+      return new NextResponse("Internal Server Error", { status: 500 ,
+        headers: {
+          'Access-Control-Allow-Origin': 'http://localhost:3001',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },})
     }
   }
 
