@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
                 quantity: cartItem.quantity,
             })
             ),
-        address,
+            shippingAddress:address,
         shippingRate: "0",
         totalAmount: totalPrice,
       });

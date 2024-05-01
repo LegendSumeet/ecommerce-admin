@@ -2,7 +2,11 @@ import { DataTable } from "@/components/custom ui/DataTable"
 import { columns } from "@/components/orderItems/OrderItemsColums"
 
 const OrderDetails = async ({ params }: { params: { orderId: string }}) => {
+  console.log(`${process.env.ADMIN_DASHBOARD_URL}/api/orders/${params.orderId}`)
+
   const res = await fetch(`${process.env.ADMIN_DASHBOARD_URL}/api/orders/${params.orderId}`)
+
+  console.log(`${process.env.ADMIN_DASHBOARD_URL}/api/orders/${params.orderId}`)
   const { orderDetails, customer } = await res.json()
 
   const { street, city, state, postalCode, country } = orderDetails.shippingAddress
